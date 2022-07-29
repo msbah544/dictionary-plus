@@ -1,12 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Platform } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
-import Search from "./screens/Search";
+import WordDetails from "./screens/WordDetails";
 
 export default function App() {
+  const { Navigator, Screen } = createStackNavigator();
   return (
     <View style={styles.container}>
-      <Home />
+      <NavigationContainer>
+        <Navigator screenOptions={{ headerShown: false }}>
+          <Screen name="home" component={Home} />
+          <Screen name="details" component={WordDetails} />
+        </Navigator>
+      </NavigationContainer>
     </View>
   );
 }

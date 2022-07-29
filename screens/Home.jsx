@@ -14,29 +14,10 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
 
 const headerImage = require("../assets/search.jpg");
-const Home = () => {
-  const [word, setWord] = useState("hello");
-  useEffect(() => {
-
-    const options = {
-      method: "GET",
-      url: "https://mashape-community-urban-dictionary.p.rapidapi.com/define",
-      params: { term: "hello" },
-      headers: {
-        "X-RapidAPI-Key": "9f6e26c40emsh975fafe781c05eep15d7cdjsndbc7f139ceff",
-        "X-RapidAPI-Host": "mashape-community-urban-dictionary.p.rapidapi.com",
-      },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  }, []);
+const Home = ({ navigation }) => {
+  const navigateToDetails = () => {
+    return navigation.navigate("details");
+  };
   return (
     <React.Fragment>
       <ScrollView>
@@ -93,6 +74,7 @@ const Home = () => {
                     fontWeight: "bold",
                   }}
                   placeholder="Search by word.."
+                  //value={word}
                 />
               </View>
             </View>
@@ -112,6 +94,15 @@ const Home = () => {
               </TouchableOpacity>
             </View>
           </View>
+          <TouchableOpacity onPress={navigateToDetails}>
+            <View style={styles.button}>
+              <Text
+                style={{ fontSize: 20, fontWeight: "bold", color: "white" }}
+              >
+                Search
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </React.Fragment>
@@ -142,6 +133,22 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 30,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  button: {
+    backgroundColor: "#4c2770",
+    height: 50,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
   },
 });
 
